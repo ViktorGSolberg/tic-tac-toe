@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import * as React from 'react';
+import Board from "./frontend/board/Board";
 
-function App() {
+const App: React.FC = () => {
   const [count, setCount] = useState(0)
 
   return (
@@ -38,6 +40,7 @@ function App() {
           </a>
         </p>
       </header>
+      <Board size={3} />
     </div>
   )
 }
