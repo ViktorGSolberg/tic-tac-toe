@@ -10,9 +10,11 @@ background-color: #C86752;
 height: 10rem;
 width: 10rem;
 border: 2px solid black;
+display: flex;
+justify-content: center;
 `;
 
-const PieceContainer = styled.img`height: 5rem; width: 5rem;`
+const PieceContainer = styled.img`height: 5rem; width: 5rem; align-self: center;`
 
 interface Props {
     id: number;
