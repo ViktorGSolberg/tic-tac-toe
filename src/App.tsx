@@ -16,7 +16,6 @@ const App: React.FC = () => {
     })
   }
 
-  console.log(boardState);
   return (
       <Board boardSize={boardSize} boardState={boardState} updateBoardState={updateBoardState}/>
   )

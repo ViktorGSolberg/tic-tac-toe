@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from "styled-components";
 import {BoardPiece} from "../types/board";
+import circle from "../graphics/circle.svg";
 
 const BoardContainer = styled.div`
 margin: auto;
@@ -19,6 +20,9 @@ width: 10rem;
 border: 2px solid black;
 `;
 
+const Circle = styled.img`height: 5rem; width: 5rem;`
+
+
 interface Props {
     boardSize: number;
     boardState: BoardPiece[];
@@ -28,11 +32,15 @@ interface Props {
 const Board: React.FC<Props> = ({boardSize, boardState, updateBoardState}) => {
 
     return (
+        <>
         <BoardContainer>
             {boardState.map((piece, index) => {
                 return <Box onClick={() => updateBoardState(index, BoardPiece.CROSS)} key={index}/>
             })}
         </BoardContainer>
+            <Circle src={circle} alt="circle" />
+
+        </>
         )
 }
 
