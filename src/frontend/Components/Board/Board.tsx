@@ -3,8 +3,8 @@ import styled from "styled-components";
 import {BoardPiece} from "../../Types/types";
 import BoardSquare from "./BoardSquare";
 import {numberOfRemainingTurns} from "../../Utils/utils";
-import SaveButton from "../Firebase/SaveButton";
-import DownloadButton from "../Firebase/DownloadButton";
+import {fetchGameData} from "../../../backend/firebase";
+import RegularButton from "../../Common/RegularButton";
 
 const Container = styled.div`
 display: flex;
@@ -38,7 +38,9 @@ const Board: React.FC<Props> = ({boardState, updateBoardState}) => {
                                         updateBoardState={updateBoardState} key={index}/>
                 })}
             </BoardContainer>
-            <DownloadButton />
+            <RegularButton onClick={fetchGameData}>
+                Download Game
+            </RegularButton>
         </Container>
     )
 }

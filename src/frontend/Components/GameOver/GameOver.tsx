@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled from "styled-components";
 import {BoardPiece} from "../../Types/types";
-import SaveButton from "../Firebase/SaveButton";
+import RegularButton from "../../Common/RegularButton";
+import {saveGameData} from "../../../backend/firebase";
 
 const ScreenContainer = styled.div`
 margin: auto;
@@ -40,7 +41,9 @@ const GameOver: React.FC<Props> = ({winner, boardState}) => {
     return (
         <ScreenContainer>
             <EndingMessage>{endingMessage(winner)}</EndingMessage>
-            <SaveButton boardState={boardState}/>
+            <RegularButton onClick={() => saveGameData(boardState)}>
+                Save game
+            </RegularButton>
         </ScreenContainer>
     )
 }
