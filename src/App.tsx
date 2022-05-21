@@ -3,6 +3,7 @@ import {useState} from 'react';
 import Board from "./frontend/Components/Board/Board";
 import {BoardPiece} from "./frontend/Types/types";
 import {gameIsOver} from "./frontend/Utils/utils";
+import GameOver from "./frontend/Components/GameOver/GameOver";
 
 const App: React.FC = () => {
     const boardSize = 3 * 3;
@@ -17,10 +18,12 @@ const App: React.FC = () => {
         })
     }
 
+    const gameOver = gameIsOver(boardState)
+
     return (
         <>
-            {!gameIsOver(boardState).gameIsOver ?
-                <Board boardState={boardState} updateBoardState={updateBoardState}/> : <p>game over</p>
+            {!gameOver.gameIsOver ?
+                <Board boardState={boardState} updateBoardState={updateBoardState}/> : <GameOver winner={gameOver.winner}/>
             }
         </>
     )
