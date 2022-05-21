@@ -1,6 +1,6 @@
 import {initializeApp} from "firebase/app";
-import {getDatabase, ref, set, child, get} from "firebase/database";
-import {BoardPiece} from "../frontend/Types/types";
+import {child, get, getDatabase, ref, set} from "firebase/database";
+import {BoardPiece, GameState} from "../frontend/Types/types";
 
 const firebaseConfig = {
     apiKey: "AIzaSyA2kGkWSI7YCC40g7b7m1ZBWnqSNMX27-Y",
@@ -21,15 +21,15 @@ export const saveGameData = (gameState: BoardPiece[]) => {
     })
 }
 
-export const fetchGameData = () => {
-    get(child(ref(database), 'tic-tac-toe')).then((snapshot) => {
+export const fetchGameData = async (): Promise<GameState> => {
+    let emptyGameState = {gameState: [BoardPiece.BLANK]} as GameState;
+    await get(child(ref(database), 'tic-tac-toe')).then((snapshot) => {
         if (snapshot.exists()) {
-        console.log(snapshot.val())
-        } else {
-            console.log('No data available');
+            emptyGameState = snapshot.val() as GameState
         }
     }).catch((error) => {
         console.error(error);
     });
+    return emptyGameState;
 }
 

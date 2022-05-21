@@ -21,10 +21,10 @@ interface Props {
     id: number;
     playerTurn: BoardPiece;
     squareState: BoardPiece;
-    updateBoardState: (index: number, newPiece: BoardPiece) => void;
+    updateSquareState: (index: number, newPiece: BoardPiece) => void;
 }
 
-const BoardSquare: React.FC<Props> = ({id, playerTurn, squareState, updateBoardState}) => {
+const BoardSquare: React.FC<Props> = ({id, playerTurn, squareState, updateSquareState}) => {
 
     const pieceSvg = squareState === BoardPiece.CROSS ? cross : circle;
     const pieceAlt = (squareState: BoardPiece) => {
@@ -41,7 +41,7 @@ const BoardSquare: React.FC<Props> = ({id, playerTurn, squareState, updateBoardS
     return (
         <Box onClick={() => {
             if (squareState === BoardPiece.BLANK) {
-                updateBoardState(id, playerTurn)
+                updateSquareState(id, playerTurn)
             }
         }}>
             {squareState !== BoardPiece.BLANK &&

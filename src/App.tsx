@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useState} from 'react';
 import Board from "./frontend/Components/Board/Board";
-import {BoardPiece} from "./frontend/Types/types";
+import {BoardPiece, GameState} from "./frontend/Types/types";
 import {gameIsOver} from "./frontend/Utils/utils";
 import GameOver from "./frontend/Components/GameOver/GameOver";
 
@@ -10,7 +10,7 @@ const App: React.FC = () => {
 
     const [boardState, setBoardState] = useState<BoardPiece[]>(Array(boardSize).fill(BoardPiece.BLANK));
 
-    const updateBoardState = (index: number, newPiece: BoardPiece) => {
+    const updateSquareState = (index: number, newPiece: BoardPiece) => {
         setBoardState((prevState) => {
             return prevState.map((piece, idx) => {
                 return index === idx ? newPiece : piece
@@ -18,12 +18,16 @@ const App: React.FC = () => {
         })
     }
 
+    const updateBoardState = (boardState: GameState) => {
+        setBoardState(boardState.gameState);
+    }
+
     const gameOver = gameIsOver(boardState)
 
     return (
         <>
-            {!gameOver.gameIsOver ?
-                <Board boardState={boardState} updateBoardState={updateBoardState}/> :
+            <Board boardState={boardState} updateSquareState={updateSquareState} updateBoardState={updateBoardState}/> :
+            {gameOver.gameIsOver &&
                 <GameOver winner={gameOver.winner} boardState={boardState}/>
             }
         </>

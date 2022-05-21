@@ -1,9 +1,9 @@
 import * as React from 'react';
 import styled from "styled-components";
-import {BoardPiece} from "../../Types/types";
+import {BoardPiece, GameState} from "../../Types/types";
 import BoardSquare from "./BoardSquare";
 import {numberOfRemainingTurns} from "../../Utils/utils";
-import {fetchGameData} from "../../../backend/firebase";
+import {fetchGameData, saveGameData} from "../../../backend/firebase";
 import RegularButton from "../../Common/RegularButton";
 
 const Container = styled.div`
@@ -23,23 +23,34 @@ margin-bottom: 2rem;
 
 interface Props {
     boardState: BoardPiece[];
-    updateBoardState: (index: number, newPiece: BoardPiece) => void;
+    updateSquareState: (index: number, newPiece: BoardPiece) => void;
+    updateBoardState: (boardState: GameState) => void;
 }
 
-const Board: React.FC<Props> = ({boardState, updateBoardState}) => {
-
+const Board: React.FC<Props> = ({boardState, updateSquareState, updateBoardState}) => {
     const remainingTurns = numberOfRemainingTurns(boardState);
     const playerTurn = remainingTurns % 2 === 1 ? BoardPiece.CROSS : BoardPiece.CIRCLE;
+
+    const downloadGameState = async () => {
+        const storedGameState = await fetchGameData();
+        if (storedGameState.gameState.length === boardState.length) {
+            updateBoardState(storedGameState);
+        }
+    }
+
     return (
         <Container>
             <BoardContainer>
                 {boardState.map((piece, index) => {
                     return <BoardSquare id={index} playerTurn={playerTurn} squareState={piece}
-                                        updateBoardState={updateBoardState} key={index}/>
+                                        updateSquareState={updateSquareState} key={index}/>
                 })}
             </BoardContainer>
-            <RegularButton onClick={fetchGameData}>
+            <RegularButton onClick={downloadGameState}>
                 Download Game
+            </RegularButton>
+            <RegularButton onClick={() => saveGameData(boardState)}>
+                Save game
             </RegularButton>
         </Container>
     )
