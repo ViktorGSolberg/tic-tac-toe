@@ -4,21 +4,21 @@ import Board from "./frontend/board/Board";
 import {BoardPiece} from "./frontend/types/board";
 
 const App: React.FC = () => {
-  const boardSize = 3*3;
+    const boardSize = 3 * 3;
 
-  const [boardState, setBoardState] = useState<BoardPiece[]>(Array(boardSize).fill(BoardPiece.BLANK));
+    const [boardState, setBoardState] = useState<BoardPiece[]>(Array(boardSize).fill(BoardPiece.BLANK));
 
-  const updateBoardState = (index: number, newPiece: BoardPiece) => {
-    setBoardState((prevState) => {
-      return prevState.map((piece, idx) => {
-        return index === idx ? newPiece : piece
-      })
-    })
-  }
+    const updateBoardState = (index: number, newPiece: BoardPiece) => {
+        setBoardState((prevState) => {
+            return prevState.map((piece, idx) => {
+                return index === idx ? newPiece : piece
+            })
+        })
+    }
 
-  return (
-      <Board boardSize={boardSize} boardState={boardState} updateBoardState={updateBoardState}/>
-  )
+    return (
+        <Board boardState={boardState} updateBoardState={updateBoardState}/>
+    )
 }
 
 export default App

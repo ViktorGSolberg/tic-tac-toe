@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from "styled-components";
 import {BoardPiece} from "../types/board";
-import circle from "../graphics/circle.svg";
+import BoardSquare from "./BoardSquare";
 
 const BoardContainer = styled.div`
 margin: auto;
@@ -13,35 +13,26 @@ margin-top: 2rem;
 margin-bottom: 2rem;
 `;
 
-const Box = styled.div`
-background-color: #C86752;
-height: 10rem;
-width: 10rem;
-border: 2px solid black;
-`;
-
-const Circle = styled.img`height: 5rem; width: 5rem;`
-
-
 interface Props {
-    boardSize: number;
     boardState: BoardPiece[];
     updateBoardState: (index: number, newPiece: BoardPiece) => void;
 }
 
-const Board: React.FC<Props> = ({boardSize, boardState, updateBoardState}) => {
+const Board: React.FC<Props> = ({boardState, updateBoardState}) => {
 
+    const remainingTurns = boardState.reduce((acc, curr) => (curr === BoardPiece.BLANK ? acc + 1 : acc), 0);
+    const playerTurn = remainingTurns % 2 === 1 ? BoardPiece.CROSS : BoardPiece.CIRCLE;
+    console.log(boardState);
     return (
         <>
-        <BoardContainer>
-            {boardState.map((piece, index) => {
-                return <Box onClick={() => updateBoardState(index, BoardPiece.CROSS)} key={index}/>
-            })}
-        </BoardContainer>
-            <Circle src={circle} alt="circle" />
-
+            <BoardContainer>
+                {boardState.map((piece, index) => {
+                    return <BoardSquare id={index} playerTurn={playerTurn} squareState={piece}
+                                        updateBoardState={updateBoardState} key={index}/>
+                })}
+            </BoardContainer>
         </>
-        )
+    )
 }
 
 export default Board
