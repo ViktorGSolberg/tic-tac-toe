@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from "styled-components";
+import {BoardPiece} from "../types/board";
 
 const BoardContainer = styled.div`
 margin: auto;
@@ -19,19 +20,17 @@ border: 2px solid black;
 `;
 
 interface Props {
-    size: number;
+    boardSize: number;
+    boardState: BoardPiece[];
+    updateBoardState: (index: number, newPiece: BoardPiece) => void;
 }
 
-const Board: React.FC<Props> = ({size}) => {
-
-    const handleClick = () => {
-        console.log('click');
-    }
+const Board: React.FC<Props> = ({boardSize, boardState, updateBoardState}) => {
 
     return (
         <BoardContainer>
-            {Array.from({length: size*size}, (v, i) => i).map((num, index) => {
-                return <Box onClick={handleClick} key={index}/>
+            {boardState.map((piece, index) => {
+                return <Box onClick={() => updateBoardState(index, BoardPiece.CROSS)} key={index}/>
             })}
         </BoardContainer>
         )
