@@ -3,6 +3,8 @@ import styled from "styled-components";
 import {BoardPiece} from "../../Types/types";
 import BoardSquare from "./BoardSquare";
 import {numberOfRemainingTurns} from "../../Utils/utils";
+import SaveButton from "../Firebase/SaveButton";
+import DownloadButton from "../Firebase/DownloadButton";
 
 const BoardContainer = styled.div`
 margin: auto;
@@ -31,6 +33,7 @@ const Board: React.FC<Props> = ({boardState, updateBoardState}) => {
                                         updateBoardState={updateBoardState} key={index}/>
                 })}
             </BoardContainer>
+            <DownloadButton />
         </>
     )
 }

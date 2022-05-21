@@ -1,5 +1,5 @@
 import {initializeApp} from "firebase/app";
-import {getDatabase, ref, set} from "firebase/database";
+import {getDatabase, ref, set, child, get} from "firebase/database";
 import {BoardPiece} from "../frontend/Types/types";
 
 const firebaseConfig = {
@@ -19,5 +19,17 @@ export const saveGameData = (gameState: BoardPiece[]) => {
     set(ref(database, 'tic-tac-toe'), {
         gameState: gameState,
     })
+}
+
+export const fetchGameData = () => {
+    get(child(ref(database), 'tic-tac-toe')).then((snapshot) => {
+        if (snapshot.exists()) {
+        console.log(snapshot.val())
+        } else {
+            console.log('No data available');
+        }
+    }).catch((error) => {
+        console.error(error);
+    });
 }
 
