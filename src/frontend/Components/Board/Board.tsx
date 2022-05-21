@@ -6,6 +6,11 @@ import {numberOfRemainingTurns} from "../../Utils/utils";
 import SaveButton from "../Firebase/SaveButton";
 import DownloadButton from "../Firebase/DownloadButton";
 
+const Container = styled.div`
+display: flex;
+flex-direction: column;
+`;
+
 const BoardContainer = styled.div`
 margin: auto;
 width: 30%;
@@ -26,7 +31,7 @@ const Board: React.FC<Props> = ({boardState, updateBoardState}) => {
     const remainingTurns = numberOfRemainingTurns(boardState);
     const playerTurn = remainingTurns % 2 === 1 ? BoardPiece.CROSS : BoardPiece.CIRCLE;
     return (
-        <>
+        <Container>
             <BoardContainer>
                 {boardState.map((piece, index) => {
                     return <BoardSquare id={index} playerTurn={playerTurn} squareState={piece}
@@ -34,7 +39,7 @@ const Board: React.FC<Props> = ({boardState, updateBoardState}) => {
                 })}
             </BoardContainer>
             <DownloadButton />
-        </>
+        </Container>
     )
 }
 
