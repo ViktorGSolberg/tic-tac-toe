@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {useState} from 'react';
-import Board from "./frontend/board/Board";
-import {BoardPiece} from "./frontend/types/board";
+import Board from "./frontend/Components/Board/Board";
+import {BoardPiece} from "./frontend/Types/types";
+import {gameIsOver} from "./frontend/Utils/utils";
 
 const App: React.FC = () => {
     const boardSize = 3 * 3;
@@ -17,7 +18,11 @@ const App: React.FC = () => {
     }
 
     return (
-        <Board boardState={boardState} updateBoardState={updateBoardState}/>
+        <>
+            {!gameIsOver(boardState).gameIsOver ?
+                <Board boardState={boardState} updateBoardState={updateBoardState}/> : <p>game over</p>
+            }
+        </>
     )
 }
 

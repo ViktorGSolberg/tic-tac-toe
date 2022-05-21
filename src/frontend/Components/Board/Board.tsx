@@ -1,7 +1,8 @@
 import * as React from 'react';
 import styled from "styled-components";
-import {BoardPiece} from "../types/board";
+import {BoardPiece} from "../../Types/types";
 import BoardSquare from "./BoardSquare";
+import {numberOfRemainingTurns} from "../../Utils/utils";
 
 const BoardContainer = styled.div`
 margin: auto;
@@ -20,9 +21,8 @@ interface Props {
 
 const Board: React.FC<Props> = ({boardState, updateBoardState}) => {
 
-    const remainingTurns = boardState.reduce((acc, curr) => (curr === BoardPiece.BLANK ? acc + 1 : acc), 0);
+    const remainingTurns = numberOfRemainingTurns(boardState);
     const playerTurn = remainingTurns % 2 === 1 ? BoardPiece.CROSS : BoardPiece.CIRCLE;
-    console.log(boardState);
     return (
         <>
             <BoardContainer>

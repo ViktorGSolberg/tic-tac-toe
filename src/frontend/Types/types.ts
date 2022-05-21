@@ -3,3 +3,8 @@ export enum BoardPiece {
     CIRCLE = 'CIRCLE',
     BLANK = 'BLANK',
 }
+
+export interface EndOfGame {
+    gameIsOver: boolean;
+    winner: BoardPiece;
+}

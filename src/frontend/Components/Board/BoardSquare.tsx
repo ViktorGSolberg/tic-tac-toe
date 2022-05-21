@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from "styled-components";
-import {BoardPiece} from "../types/board";
-import circle from "../graphics/circle.svg";
-import cross from "../graphics/cross.svg";
+import {BoardPiece} from "../../Types/types";
+import circle from "../../Graphics/circle.svg";
+import cross from "../../Graphics/cross.svg";
 
 
 const Box = styled.div`
