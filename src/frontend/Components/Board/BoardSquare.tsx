@@ -12,6 +12,7 @@ width: 10rem;
 border: 2px solid black;
 display: flex;
 justify-content: center;
+cursor: pointer;
 `;
 
 const PieceContainer = styled.img`height: 5rem; width: 5rem; align-self: center;`

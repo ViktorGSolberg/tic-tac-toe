@@ -23,7 +23,8 @@ const App: React.FC = () => {
     return (
         <>
             {!gameOver.gameIsOver ?
-                <Board boardState={boardState} updateBoardState={updateBoardState}/> : <GameOver winner={gameOver.winner}/>
+                <Board boardState={boardState} updateBoardState={updateBoardState}/> :
+                <GameOver winner={gameOver.winner} boardState={boardState}/>
             }
         </>
     )

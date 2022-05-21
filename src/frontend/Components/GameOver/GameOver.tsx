@@ -1,13 +1,14 @@
 import * as React from 'react';
 import styled from "styled-components";
 import {BoardPiece} from "../../Types/types";
+import SaveButton from "../Firebase/SaveButton";
 
 const ScreenContainer = styled.div`
 margin: auto;
 width: 30%;
 display: flex;
 justify-content: center;
-flex-wrap: wrap;
+flex-direction: column;
 margin-top: 2rem;
 margin-bottom: 2rem;
 `;
@@ -20,9 +21,10 @@ const EndingMessage = styled.h1`
 
 interface Props {
     winner: BoardPiece;
+    boardState: BoardPiece[];
 }
 
-const GameOver: React.FC<Props> = ({winner}) => {
+const GameOver: React.FC<Props> = ({winner, boardState}) => {
 
     const endingMessage = (winner: BoardPiece) => {
         switch (winner) {
@@ -38,6 +40,7 @@ const GameOver: React.FC<Props> = ({winner}) => {
     return (
         <ScreenContainer>
             <EndingMessage>{endingMessage(winner)}</EndingMessage>
+            <SaveButton boardState={boardState}/>
         </ScreenContainer>
     )
 }
