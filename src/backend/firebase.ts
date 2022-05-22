@@ -3,13 +3,13 @@ import {child, get, getDatabase, ref, set} from "firebase/database";
 import {BoardPiece, GameState} from "../frontend/Types/types";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyA2kGkWSI7YCC40g7b7m1ZBWnqSNMX27-Y",
-    authDomain: "tic-tac-toe-4676b.firebaseapp.com",
-    databaseURL: "https://tic-tac-toe-4676b-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "tic-tac-toe-4676b",
-    storageBucket: "tic-tac-toe-4676b.appspot.com",
-    messagingSenderId: "930687640921",
-    appId: "1:930687640921:web:97e38b1aee57494c011848"
+    apiKey: import.meta.env.VITE_API_KEY as string,
+    authDomain: import.meta.env.VITE_AUTH_DOMAIN as string,
+    databaseURL: import.meta.env.VITE_DATABASE_URL as string,
+    projectId: import.meta.env.VITE_PROJECT_ID as string,
+    storageBucket: import.meta.env.VITE_STORAGE_BUCKET as string,
+    messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID as string,
+    appId: import.meta.env.VITE_APP_ID as string
 };
 
 const app = initializeApp(firebaseConfig);

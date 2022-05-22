@@ -5,6 +5,7 @@ import {BoardPiece, GameState} from "./frontend/Types/types";
 import {gameIsOver} from "./frontend/Utils/utils";
 import GameOver from "./frontend/Components/GameOver/GameOver";
 
+
 const App: React.FC = () => {
     const boardSize = 3 * 3;
 

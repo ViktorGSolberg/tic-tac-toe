@@ -17,7 +17,7 @@ export const gameIsOver = (gameState: BoardPiece[]): EndOfGame => {
 }
 
 export const numberOfRemainingTurns = (boardState: BoardPiece[]) =>
-    boardState.reduce((acc, curr) => (curr === BoardPiece.BLANK ? acc + 1 : acc), 0);
+    boardState.reduce((acc, piece) => (piece === BoardPiece.BLANK ? acc + 1 : acc), 0);
 
 const playerHasWon = (gameState: BoardPiece[], player: BoardPiece): boolean => {
     if (gameState[0] === player && gameState[1] === player && gameState[2] === player) {
