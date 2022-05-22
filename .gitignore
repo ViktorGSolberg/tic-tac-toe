@@ -13,3 +13,4 @@ yarn-error.log
 ci-tests/reports
 secure.log
 *.iml
+.firebase
